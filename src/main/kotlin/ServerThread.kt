@@ -1,7 +1,7 @@
 import java.io.*
 import java.net.Socket
 
-internal class ServerThread(  // сокет, через который сервер общается с клиентом,
+internal class ServerThread(
     private val socket: Socket
 ) : Thread() {
     companion object {

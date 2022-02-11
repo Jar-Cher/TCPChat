@@ -16,10 +16,10 @@ internal class SenderThread(private val clientSocket: Socket, val client: Client
         while(!client.isRegistered) {
             while(!client.isRegistrationInProgress && !client.isRegistered) {
                 try {
-                    username = incoming.readLine() // сообщения с консоли
+                    username = incoming.readLine()
                     client.isRegistrationInProgress = true
                     val protocol = Protocol.from("Server", "--u $username").binaryRepresentation
-                    outcoming.write(protocol) // отправляем на сервер
+                    outcoming.write(protocol)
                     outcoming.flush()
                     //println()
                 } catch (e: IOException) {
@@ -37,7 +37,7 @@ internal class SenderThread(private val clientSocket: Socket, val client: Client
 
             try {
                 //println("Ready to read!")
-                userInput = incoming.readLine() // сообщения с консоли
+                userInput = incoming.readLine()
                 //println()
                 when {
                     userInput.matches(Regex("""^.* --f .+$""")) -> {
@@ -46,18 +46,18 @@ internal class SenderThread(private val clientSocket: Socket, val client: Client
                         val fileStream = FileInputStream(file)
                         val protocol = Protocol.from(username, userInput, fileStream.readAllBytes()).binaryRepresentation
                         fileStream.close()
-                        outcoming.write(protocol) // отправляем на сервер
+                        outcoming.write(protocol)
                         outcoming.flush()
                     }
                     userInput.matches(Regex("""^--e$""")) -> {
                         val protocol = Protocol.from(username, userInput).binaryRepresentation
-                        outcoming.write(protocol) // отправляем на сервер
+                        outcoming.write(protocol)
                         outcoming.flush()
                         client.disconnect()
                     }
                     else -> {
                         val protocol = Protocol.from(username, userInput).binaryRepresentation
-                        outcoming.write(protocol) // отправляем на сервер
+                        outcoming.write(protocol)
                         outcoming.flush()
                     }
                 }

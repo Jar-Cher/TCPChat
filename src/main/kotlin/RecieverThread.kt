@@ -18,7 +18,7 @@ public class RecieverThread(private val clientSocket: Socket, val client: Client
                 println(input.toString())
                 if (input.getText().matches(Regex("""^.* --f .+$"""))) {
                     input.saveFile(System.getProperty("user.dir") + "\\ReceivedFiles\\")
-                    println("File received, saved at " + System.getProperty("user.dir") + "\\ReceivedFiles")
+                    println("File received, saved at: " + System.getProperty("user.dir") + "\\ReceivedFiles")
                 }
             }
         } catch (e: IOException) {

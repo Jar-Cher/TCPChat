@@ -4,7 +4,7 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 
-class Server {
+class NBServer {
 
     companion object {
         const val PORT = 8081
